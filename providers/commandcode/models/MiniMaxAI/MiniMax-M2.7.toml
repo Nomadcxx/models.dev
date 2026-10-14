@@ -1,0 +1,17 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Reasoning: MiniMax-M2.7 is thinking-only on every host that serves it, so there is no toggle,
+#   effort, or reasoning-budget field a caller can set (confirmed on alibaba-token-plan,
+#   amazon-bedrock, and auriko). Empty means no caller control, not untested.
+base_model = "minimax/MiniMax-M2.7"
+
+reasoning_options = []
+
+[limit]
+context = 200000
+
+[cost]
+input = 0.3
+output = 1.2
+cache_read = 0.06

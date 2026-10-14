@@ -1,0 +1,16 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Relay reasoning baseline: providers/deepseek/models/deepseek-v4-pro.toml; providers/zenmux/models/deepseek/deepseek-v4.1-flash.toml
+# Toggle: thinking.type = enabled|disabled
+# Effort: reasoning_effort = low|high|max
+# Pricing: off-peak rates; peak 01:00-04:00 and 06:00-10:00 UTC Mon-Fri is 2x.
+base_model = "deepseek/deepseek-v4.1-flash"
+name = "DeepSeek V4.1 Flash Fast"
+
+reasoning_options = [{ type = "toggle" }, { type = "effort", values = ["low", "high", "max"] }]
+
+[cost]
+input = 0.16
+output = 0.58
+cache_read = 0.016

@@ -1,0 +1,16 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Relay reasoning baseline: providers/vercel/models/poolside/laguna-s-2.1.toml
+# Toggle: chat_template_kwargs.enable_thinking = true|false
+base_model = "poolside/laguna-s-2.1"
+
+reasoning_options = [{ type = "toggle" }]
+
+[limit]
+context = 256000
+
+[cost]
+input = 0
+output = 0
+cache_read = 0

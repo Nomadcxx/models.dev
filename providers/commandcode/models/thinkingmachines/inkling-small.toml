@@ -1,0 +1,16 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Output ceiling: capped at the host context window (prompt plus completion).
+base_model = "thinkingmachines/inkling-small"
+
+reasoning_options = [{ type = "effort", values = ["none", "minimal", "low", "medium", "high", "max"] }]
+
+[limit]
+output = 1000000
+context = 1000000
+
+[cost]
+input = 0.5
+output = 1.2
+cache_read = 0.1

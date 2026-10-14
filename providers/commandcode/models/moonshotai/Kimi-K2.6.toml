@@ -1,0 +1,18 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Relay reasoning baseline: providers/ofox/models/moonshotai/kimi-k2.5.toml; providers/tokengo/models/moonshotai/kimi-k2.6.toml
+# Toggle: thinking.type = enabled|disabled
+# Output ceiling: capped at the host context window (prompt plus completion).
+base_model = "moonshotai/kimi-k2.6"
+
+reasoning_options = [{ type = "toggle" }]
+
+[limit]
+output = 256000
+context = 256000
+
+[cost]
+input = 0.95
+output = 4
+cache_read = 0.16

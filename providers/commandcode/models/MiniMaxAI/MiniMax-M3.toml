@@ -1,0 +1,17 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Relay reasoning baseline: providers/volcengine-coding-plan/models/minimax-m3.toml
+# Toggle: thinking.type = enabled|disabled
+# Effective discounted rates: https://commandcode.ai/docs/resources/pricing-limits#minimax-m3-2x-usage
+base_model = "minimax/MiniMax-M3"
+
+reasoning_options = [{ type = "toggle" }]
+
+[limit]
+context = 1000000
+
+[cost]
+input = 0.3
+output = 1.2
+cache_read = 0.06
