@@ -1,10 +1,11 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Effort baseline: CommandCode CLI 1.74.1 lists low|medium|high for GPT-5.4 Mini.
+# xhigh follows the native/peer baseline; live xhigh hit HTTP 403 MODEL_NOT_IN_PLAN.
+# Live /chat/completions (2026-10-14): reasoning_effort = none -> HTTP 400 invalid option.
 base_model = "openai/gpt-5.4-mini"
 
-reasoning_options = [{ type = "effort", values = ["low", "medium", "high"] }]
+reasoning_options = [{ type = "effort", values = ["low", "medium", "high", "xhigh"] }]
 
 [cost]
 input = 0.75

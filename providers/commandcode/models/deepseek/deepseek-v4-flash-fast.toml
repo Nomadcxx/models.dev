@@ -1,6 +1,7 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
+# Live /chat/completions (2026-10-14): reasoning_effort=off -> HTTP 400, this alias cannot turn thinking off.
 base_model = "deepseek/deepseek-v4-flash"
 name = "DeepSeek V4 Flash Fast"
 

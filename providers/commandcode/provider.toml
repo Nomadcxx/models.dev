@@ -5,8 +5,7 @@
 # other models use /chat/completions on the same base URL.
 # DeepSeek time-of-day prices use the published off-peak rate; peak is 2x.
 # Chat controls: normalized reasoning_effort; none/minimal are rejected.
-# Native thinking/enable_thinking/thinking_budget fields do not control chat reasoning.
-# Off is model-specific; verified DeepSeek switches use reasoning_effort = off.
+# Toggle paths are model-specific: DeepSeek uses off; MiniMax/NVIDIA use omission versus low.
 # Live SDK checks on Linux: Qwen/Claude generation and streaming (2026-10-14).
 name = "CommandCode"
 npm = "@ai-sdk/openai-compatible"

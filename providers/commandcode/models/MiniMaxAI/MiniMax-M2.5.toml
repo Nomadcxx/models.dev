@@ -1,9 +1,10 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Reasoning: MiniMax-M2.5 is thinking-only on every host that serves it, so there is no toggle,
-#   effort, or reasoning-budget field a caller can set (confirmed on alibaba-token-plan,
-#   amazon-bedrock, and auriko). Empty means no caller control, not untested.
+# Reasoning controls follow the native/established-peer thinking-only baseline.
+# Baseline: providers/minimax/models/MiniMax-M2.5.toml and
+# providers/alibaba-token-plan/models/MiniMax-M2.5.toml
+
 base_model = "minimax/MiniMax-M2.5"
 
 reasoning_options = []
