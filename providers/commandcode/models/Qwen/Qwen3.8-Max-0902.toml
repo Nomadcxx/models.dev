@@ -1,12 +1,9 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Relay reasoning baseline: providers/alibaba/models/qwen3.8-max.toml
-# Toggle: enable_thinking = true|false
-# Budget: thinking_budget (reasoning tokens); effort: reasoning_effort when listed.
 base_model = "alibaba/qwen3.8-max-0902"
 
-reasoning_options = [{ type = "toggle" }, { type = "effort", values = ["low", "medium", "xhigh"] }, { type = "budget_tokens" }]
+reasoning_options = [{ type = "effort", values = ["low", "medium", "xhigh"] }]
 
 [cost]
 input = 2

@@ -1,11 +1,12 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Relay reasoning baseline: providers/vercel/models/poolside/laguna-s-2.1.toml
-# Toggle: chat_template_kwargs.enable_thinking = true|false
+# Reasoning: gateway rejects off; CommandCode CLI lists no graded controls.
+# Native toggle/budget fields do not apply to the gateway request surface.
+# Source: https://unpkg.com/command-code@1.74.1/dist/cli.mjs (checked 2026-10-14)
 base_model = "poolside/laguna-s-2.1"
 
-reasoning_options = [{ type = "toggle" }]
+reasoning_options = []
 
 [limit]
 context = 256000

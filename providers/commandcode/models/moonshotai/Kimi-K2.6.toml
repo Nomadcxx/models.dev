@@ -1,12 +1,13 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Relay reasoning baseline: providers/ofox/models/moonshotai/kimi-k2.5.toml; providers/tokengo/models/moonshotai/kimi-k2.6.toml
-# Toggle: thinking.type = enabled|disabled
 # Output ceiling: capped at the host context window (prompt plus completion).
+# Reasoning: gateway rejects off; CommandCode CLI lists no graded controls.
+# Native toggle/budget fields do not apply to the gateway request surface.
+# Source: https://unpkg.com/command-code@1.74.1/dist/cli.mjs (checked 2026-10-14)
 base_model = "moonshotai/kimi-k2.6"
 
-reasoning_options = [{ type = "toggle" }]
+reasoning_options = []
 
 [limit]
 output = 256000

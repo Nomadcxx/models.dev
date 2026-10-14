@@ -3,7 +3,7 @@
 # https://api.commandcode.ai/provider/v1/models
 base_model = "mistral/mistral-large-4"
 
-reasoning_options = [{ type = "effort", values = ["none", "high"] }]
+reasoning_options = [{ type = "effort", values = ["high"] }]
 
 [limit]
 context = 524288

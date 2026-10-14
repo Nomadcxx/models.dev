@@ -1,12 +1,12 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Relay reasoning baseline: providers/alibaba/models/qwen3.8-max.toml
-# Toggle: enable_thinking = true|false
-# Budget: thinking_budget (reasoning tokens); effort: reasoning_effort when listed.
+# Reasoning: gateway rejects off; CommandCode CLI lists no graded controls.
+# Native toggle/budget fields do not apply to the gateway request surface.
+# Source: https://unpkg.com/command-code@1.74.1/dist/cli.mjs (checked 2026-10-14)
 base_model = "alibaba/qwen3.7-plus"
 
-reasoning_options = [{ type = "toggle" }, { type = "budget_tokens" }]
+reasoning_options = []
 
 [cost]
 input = 0.4

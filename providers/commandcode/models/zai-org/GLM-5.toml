@@ -1,11 +1,12 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Relay reasoning baseline: providers/tokengo/models/z-ai/glm-5.1.toml; providers/ofox/models/z-ai/glm-5.toml
-# Toggle: thinking.type = enabled|disabled
+# Reasoning: gateway rejects off; CommandCode CLI lists no graded controls.
+# Native toggle/budget fields do not apply to the gateway request surface.
+# Source: https://unpkg.com/command-code@1.74.1/dist/cli.mjs (checked 2026-10-14)
 base_model = "zhipuai/glm-5"
 
-reasoning_options = [{ type = "toggle" }]
+reasoning_options = []
 
 [limit]
 context = 200000

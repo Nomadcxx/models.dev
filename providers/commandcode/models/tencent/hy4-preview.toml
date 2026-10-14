@@ -3,7 +3,7 @@
 # https://api.commandcode.ai/provider/v1/models
 base_model = "tencent/hy4-preview"
 
-reasoning_options = [{ type = "effort", values = ["none", "high"] }]
+reasoning_options = [{ type = "effort", values = ["high"] }]
 
 [cost]
 input = 0.834

@@ -1,13 +1,10 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-14)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
-# Relay reasoning baseline: providers/deepseek/models/deepseek-v4-pro.toml; providers/zenmux/models/deepseek/deepseek-v4.1-flash.toml
-# Toggle: thinking.type = enabled|disabled
-# Effort: reasoning_effort = low|high|max
 base_model = "deepseek/deepseek-v4-flash"
 name = "DeepSeek V4 Flash Fast"
 
-reasoning_options = [{ type = "toggle" }, { type = "effort", values = ["low", "high", "max"] }]
+reasoning_options = [{ type = "effort", values = ["low", "high", "max"] }]
 
 [cost]
 input = 0.28
