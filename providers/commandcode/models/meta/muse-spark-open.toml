@@ -1,0 +1,25 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-21)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Live /chat/completions (2026-10-21): reasoning returned in reasoning and reasoning_details (array).
+#   reasoning_effort = off -> HTTP 400 unsupported_value; none -> HTTP 400 invalid option.
+#   Repeated trials (n=3-5): reasoning tokens low {238-456} / medium {493-808} / high {571-1085} /
+#   xhigh {346-705} / max {403-786}.
+#   low, medium and high occupy distinct bands (low < medium < high, non-overlapping against low);
+#   xhigh and max overlap both bands and differ from no other level, so they are not listed.
+# Interleaved: reasoning_content, verified with an opencode tool round-trip 2026-10-21
+#   (read main.go, follow-up turn, no schema error). reasoning_details is NOT assumed correct for
+#   this lab; the round-trip was re-checked per model on this gateway.
+# Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
+# Streaming live 2026-10-21: stream completes with data: [DONE].
+base_model = "meta/muse-spark-open"
+
+reasoning_options = [{ type = "effort", values = ["low", "medium", "high"] }]
+
+[interleaved]
+field = "reasoning_content"
+
+[cost]
+input = 1.25
+output = 4.25
+cache_read = 0.15
