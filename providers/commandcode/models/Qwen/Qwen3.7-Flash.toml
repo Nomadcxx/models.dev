@@ -1,0 +1,30 @@
+# Source: https://commandcode.ai/docs/provider (accessed 2026-10-21)
+# Model catalog + pricing: https://commandcode.ai/models and
+# https://api.commandcode.ai/provider/v1/models
+# Deal pricing (https://commandcode.ai/docs/resources/pricing-limits, accessed 2026-10-21).
+# Live /chat/completions (2026-10-21): reasoning returned in reasoning and reasoning_details
+#   (array), unlike the reasoning_content side channel of Qwen3.6-Plus/3.7-Plus on this gateway.
+#   reasoning_effort = off -> HTTP 400 unsupported_value; none -> HTTP 400 invalid option.
+#   max is accepted here (unlike Qwen3.6-Plus/3.7-Max/3.7-Plus, whose upstreams reject it).
+#   Repeated trials (n=5, easy prompt): reasoning tokens low {374-1024} / high {354-4291} /
+#   xhigh {349-651} / max {381-1595} - ranges overlap at every level; no level changes the
+#   reasoning output.
+# Interleaved: reasoning_content, verified with an opencode tool round-trip 2026-10-21
+#   (read main.go, follow-up turn, no schema error). reasoning_details is NOT assumed here; the
+#   round-trip was re-checked per model on this gateway.
+# Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
+# Streaming live 2026-10-21: stream completes with data: [DONE].
+base_model = "alibaba/qwen3.7-flash"
+
+base_model_omit = ["limit.input"]
+
+reasoning_options = []
+
+[interleaved]
+field = "reasoning_content"
+
+[cost]
+input = 0.03
+output = 0.13
+cache_read = 0.006
+cache_write = 0.038
