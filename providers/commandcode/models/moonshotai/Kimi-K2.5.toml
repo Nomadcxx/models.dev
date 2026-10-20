@@ -14,6 +14,7 @@
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Output ceiling: capped at the host context window (prompt plus completion), as Kimi-K2.7-Code.
 base_model = "moonshotai/kimi-k2.5"
+
 reasoning = false
 
 [limit]

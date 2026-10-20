@@ -9,11 +9,15 @@
 #   Repeated trials (n=5, easy prompt): reasoning tokens low {374-1024} / high {354-4291} /
 #   xhigh {349-651} / max {381-1595} - ranges overlap at every level; no level changes the
 #   reasoning output.
-# Interleaved: reasoning_content, verified with an opencode tool round-trip 2026-10-21
-#   (read main.go, follow-up turn, no schema error). reasoning_details is NOT assumed here; the
-#   round-trip was re-checked per model on this gateway.
+# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
+#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
+#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
+#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
+#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
+# Context price bands (host pricing table, accessed 2026-10-21): <= 32K 0.03/0.13/0.006/0.038,
+#   <= 256K 0.10/0.40/0.02/0.125, > 256K 0.20/0.80/0.04/0.25 (input/output/cache read/cache write).
 base_model = "alibaba/qwen3.7-flash"
 
 base_model_omit = ["limit.input"]
@@ -21,10 +25,24 @@ base_model_omit = ["limit.input"]
 reasoning_options = []
 
 [interleaved]
-field = "reasoning_content"
+field = "reasoning_details"
 
 [cost]
 input = 0.03
 output = 0.13
 cache_read = 0.006
 cache_write = 0.038
+
+[[cost.tiers]]
+tier = { type = "context", size = 32_000 }
+input = 0.10
+output = 0.40
+cache_read = 0.02
+cache_write = 0.125
+
+[[cost.tiers]]
+tier = { type = "context", size = 256_000 }
+input = 0.20
+output = 0.80
+cache_read = 0.04
+cache_write = 0.25

@@ -10,9 +10,11 @@
 #   Repeated trials (n=3-5): reasoning tokens low {55-129} / medium {86-250} / high {76-218} /
 #   xhigh {61-188} / max {196-206}; low is separated from high/xhigh/max and max from xhigh, so the
 #   ladder is effective; the documented ladder is listed as published.
-# Interleaved: reasoning_content, verified with an opencode tool round-trip 2026-10-21
-#   (read main.go, follow-up turn, no schema error). reasoning_details is NOT assumed correct for
-#   this lab; the round-trip was re-checked per model on this gateway.
+# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
+#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
+#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
+#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
+#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 base_model = "reflection/beam-1.0-501b-a23b"
@@ -20,7 +22,7 @@ base_model = "reflection/beam-1.0-501b-a23b"
 reasoning_options = [{ type = "effort", values = ["low", "medium", "high", "xhigh", "max"] }]
 
 [interleaved]
-field = "reasoning_content"
+field = "reasoning_details"
 
 [cost]
 input = 0
