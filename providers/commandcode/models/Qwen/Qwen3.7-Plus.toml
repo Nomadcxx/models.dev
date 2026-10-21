@@ -7,6 +7,8 @@
 #   Repeated trials (n=3-5, easy and hard prompts): reasoning tokens low {124-234} / high {128-244} /
 #   medium {128-128} / xhigh {126-130} - ranges overlap at every level (an easy prompt clamps the
 #   reasoning at ~128 tokens); no level changes the reasoning output.
+#   Paired test (10 fixed prompts, low vs xhigh on the same prompt): mean Δ -4 reasoning tokens
+#   (4 prompts higher, 5 lower), sign p = 1.0; the paired comparison finds no level effect.
 # Interleaved: reasoning_content, verified with an opencode tool round-trip 2026-10-21
 #   (read main.go, follow-up turn, no schema error).
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.

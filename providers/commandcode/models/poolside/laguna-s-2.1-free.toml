@@ -11,6 +11,9 @@
 #   high {335-2048} / xhigh {1048} / max {208-1587}. The level ordering does not reproduce
 #   (round 1 max > low, round 2 low > max) and identical settings vary 191-2048, so no level
 #   demonstrably changes the reasoning output.
+#   Paired test attempted the same design (10 fixed prompts, low vs xhigh): upstream capacity
+#   errors left 1 valid pair (mean Δ +249, sign p = 1.0), so the paired design is inconclusive
+#   here; the unpaired evidence above is the basis for reasoning_options = [].
 # Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
 #   (see the live note above), so reasoning_details is the side channel on this API. The opencode
 #   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a

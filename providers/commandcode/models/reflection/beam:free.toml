@@ -8,8 +8,9 @@
 #   reasoning_effort = off -> HTTP 400 unsupported_value; none -> HTTP 400 invalid option;
 #   low/medium/high/xhigh/max all accepted (HTTP 200).
 #   Repeated trials (n=3-5): reasoning tokens low {55-129} / medium {86-250} / high {76-218} /
-#   xhigh {61-188} / max {196-206}; low is separated from high/xhigh/max and max from xhigh, so the
-#   ladder is effective; the documented ladder is listed as published.
+#   xhigh {61-188} / max {196-206}; only max separates from low and xhigh - the low, medium, high
+#   and xhigh ranges overlap pairwise, so the trials show max differs and nothing more; the
+#   documented ladder is listed as published.
 # Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
 #   (see the live note above), so reasoning_details is the side channel on this API. The opencode
 #   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
