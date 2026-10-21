@@ -10,6 +10,8 @@
 #   reasoning output.
 #   Paired test (10 fixed prompts, low vs xhigh on the same prompt; one pair reached the 8000-token
 #   cap on both sides): mean Δ -42 reasoning tokens (4 higher, 6 lower), sign p = 0.75; no level effect.
+# CommandCode accepts low|medium|high|xhigh; max is rejected. The enable_thinking=false probe did
+#   not turn reasoning off, so only the accepted effort values are listed.
 # Interleaved: reasoning_content, verified with an opencode tool round-trip 2026-10-21
 #   (read main.go, follow-up turn, no schema error).
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
@@ -21,7 +23,7 @@ schema = 2
 base_model = "alibaba/qwen3.7-max"
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
 
 [api.chat-completions]
 compatibility = { reasoning_field = "reasoning_content" }

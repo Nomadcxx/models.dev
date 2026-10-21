@@ -11,11 +11,8 @@
 # Paired follow-up (2026-10-22; 10 fixed prompts, same prompt at low and xhigh): xhigh used more
 #   reasoning tokens on all 10 (mean Δ +317; two-sided sign p = 0.001953). I added xhigh. CommandCode
 #   accepts max, but Meta's native docs reject it and no peer publishes it, so I left it out.
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
-#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
+# Response field: reasoning_details (array). OpenCode replay has not been verified for
+#   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 schema = 2
@@ -25,7 +22,7 @@ base_model = "meta/muse-spark-open"
 reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 1.25

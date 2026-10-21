@@ -11,11 +11,8 @@
 #   invalid option. Repeated trials (n=3): level ranges overlap (low {163-291} / medium {175-201} /
 #   high {143-218} / xhigh {161-230} / max {190-225}) - presence of effort is the only control, so a
 #   bare toggle, same as the nemotron-3-ultra sibling.
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
-#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
+# Response field: reasoning_details (array). OpenCode replay has not been verified for
+#   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Vision live 2026-10-21: image input works (solid red PNG -> "Red"); modalities inherited from
@@ -31,7 +28,7 @@ reasoning = { supported = true, toggle = true }
 context = 262_144
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 0.2

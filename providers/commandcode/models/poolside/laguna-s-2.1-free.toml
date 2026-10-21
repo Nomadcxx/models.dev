@@ -13,12 +13,11 @@
 #   demonstrably changes the reasoning output.
 #   Paired test attempted the same design (10 fixed prompts, low vs xhigh): upstream capacity
 #   errors left 1 valid pair (mean Δ +249, sign p = 1.0), so the paired design is inconclusive
-#   here; the unpaired evidence above is the basis for reasoning_options = [].
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
-#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
+#   here. The endpoint control probe also hit HTTP 429; I keep the peer-documented toggle and mark
+#   its CommandCode forwarding as unverified.
+# Toggle: chat_template_kwargs.enable_thinking = true|false (Poolside peer request field).
+# Response field: reasoning_details (array). OpenCode replay has not been verified for
+#   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # limit.context: host catalog publishes 256000 (base is 1048576); output not published, inherited.
 # Separate control probe (CommandCode chat API, 2026-10-22): chat_template_kwargs.enable_thinking
@@ -27,13 +26,13 @@ schema = 2
 base_model = "poolside/laguna-s-2.1"
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, toggle = true }
 
 [limit]
 context = 256_000
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 0

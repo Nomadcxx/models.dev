@@ -7,16 +7,14 @@
 #   reasoning_effort = off -> HTTP 400 unsupported_value; none -> HTTP 400 invalid option.
 #   max is accepted here (unlike Qwen3.6-Plus/3.7-Max/3.7-Plus, whose upstreams reject it).
 #   Repeated trials (n=5, easy prompt): reasoning tokens low {374-1024} / high {354-4291} /
-#   xhigh {349-651} / max {381-1595} - ranges overlap at every level; no level changes the
-#   reasoning output.
+#   xhigh {349-651} / max {381-1595}; ranges overlap and do not establish a consistent level effect.
 #   Paired test (10 fixed prompts, low vs xhigh on the same prompt, 9 valid pairs): mean Δ +299
-#   reasoning tokens (8 higher, 1 lower), sign p = 0.039 - past p < 0.05, short of the p < 0.01
-#   bar for publishing a ladder, so reasoning_options stays [].
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
-#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
+#   reasoning tokens (8 higher, 1 lower), sign p = 0.039; this is weak evidence of an effect.
+#   CommandCode accepted reasoning_effort=medium (HTTP 200, 2026-10-22). The native toggle/budget
+#   probes showed no usable effect. I list the peer-aligned effort values the host accepts; max stays
+#   out because no peer publishes it and the trials show no repeatable difference.
+# Response field: reasoning_details (array). OpenCode replay has not been verified for
+#   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Context price bands (host pricing table, accessed 2026-10-21): <= 32K 0.03/0.13/0.006/0.038,
@@ -29,10 +27,10 @@ base_model = "alibaba/qwen3.7-flash"
 base_model_omit = ["limit.input"]
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 0.03

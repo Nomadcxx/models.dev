@@ -9,21 +9,20 @@
 #   output.
 #   Paired test (10 fixed prompts, low vs xhigh on the same prompt, 9 valid pairs): mean Δ -40
 #   reasoning tokens (2 prompts higher, 7 lower), sign p = 0.18; no measurable level effect.
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
-#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
+#   CommandCode accepted reasoning_effort=medium (HTTP 200, 2026-10-22); max is accepted but no peer
+#   publishes it. The toggle probe hit HTTP 429, so I list the peer effort set without claiming a toggle.
+# Response field: reasoning_details (array). OpenCode replay has not been verified for
+#   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 schema = 2
 base_model = "alibaba/qwen3.8-max-prime"
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 4

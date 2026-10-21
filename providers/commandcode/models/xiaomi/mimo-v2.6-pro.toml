@@ -10,12 +10,9 @@
 #   Repeated trials (n=3-5, easy and hard prompts): reasoning tokens low {5-85} / high {5-68} /
 #   max {43-94} - ranges overlap at every level; no level or switch changes the reasoning output.
 #   Command Code harness reports "Reasoning effort not supported for MiMo V2.6 Pro." (2026-10-21).
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; an earlier attempt with
-#   reasoning_details broke the opencode round-trip ("Invalid input: expected array, received
-#   string"), so replay with this field is not verified yet.
+# Response field: reasoning_details (array). OpenCode replay failed with
+#   "Invalid input: expected array, received string"; replay_reasoning=false keeps this
+#   response field out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Modalities inherited from base_model (images/audio/video); host publishes no per-model modality list.
@@ -26,7 +23,7 @@ base_model = "xiaomi/mimo-v2.6-pro"
 reasoning = { supported = true }
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 0.435

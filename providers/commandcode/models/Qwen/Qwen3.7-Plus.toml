@@ -18,11 +18,12 @@
 # Separate control probe (CommandCode chat API, 2026-10-22): enable_thinking=false returned
 # 155/149/240 reasoning tokens across three short prompts; true returned 141/200/302. The field
 # did not disable reasoning on this host.
+# CommandCode accepts low|medium|high|xhigh; max is rejected. Only the accepted effort values are listed.
 schema = 2
 base_model = "alibaba/qwen3.7-plus"
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
 
 [api.chat-completions]
 compatibility = { reasoning_field = "reasoning_content" }

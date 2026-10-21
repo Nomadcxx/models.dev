@@ -14,11 +14,8 @@
 #   only usage reasoning tokens can be compared: mostly a ~12-token floor with occasional deep
 #   runs (high {12-2043}, low {12-253}, medium {1-12}, xhigh {12-15}); high produced the deepest
 #   runs in the trials.
-# Interleaved: reasoning_details - this API returns the reasoning in reasoning/reasoning_details
-#   (see the live note above), so reasoning_details is the side channel on this API. The opencode
-#   tool round-trip (read main.go, follow-up turn, no schema error) confirms replay works, but a
-#   passing round-trip does not establish which key carried the reasoning; that round-trip was run
-#   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
+# Response field: reasoning_details (array). OpenCode replay has not been verified for
+#   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # limit.output: not published; capped at the host context window, as the vercel/kilo entries.
 schema = 2
@@ -40,7 +37,7 @@ context = 256_000
 output = 256_000
 
 [api.chat-completions]
-compatibility = { reasoning_field = "reasoning_details" }
+compatibility = { replay_reasoning = false }
 
 [cost.text.input]
 price = 0
