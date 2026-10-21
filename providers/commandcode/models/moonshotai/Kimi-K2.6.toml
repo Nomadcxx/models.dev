@@ -21,18 +21,22 @@
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Output ceiling: capped at the host context window (prompt plus completion), as Kimi-K2.7-Code.
+schema = 2
 base_model = "moonshotai/kimi-k2.6"
 
-reasoning_options = []
-
-[interleaved]
-field = "reasoning_details"
+[capabilities]
+reasoning = { supported = true }
 
 [limit]
-output = 256000
-context = 256000
+output = 256_000
+context = 256_000
 
-[cost]
-input = 0.95
-output = 4
-cache_read = 0.16
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_details" }
+
+[cost.text.input]
+price = 0.95
+cache = { read = 0.16 }
+
+[cost.text.output]
+price = 4

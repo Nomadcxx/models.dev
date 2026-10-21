@@ -21,17 +21,21 @@
 # Vision live 2026-10-21: image input works (solid red PNG -> "Red"); modalities inherited from
 #   base_model (text, image/jpeg, image/png, video/mp4).
 # limit.context: host catalog publishes 262144 (base is 1048576); output not published, inherited.
+schema = 2
 base_model = "nvidia/nemotron-3.5-super-vl-120b-a12b"
 
-reasoning_options = [{ type = "toggle" }]
-
-[interleaved]
-field = "reasoning_details"
+[capabilities]
+reasoning = { supported = true, toggle = true }
 
 [limit]
-context = 262144
+context = 262_144
 
-[cost]
-input = 0.2
-output = 0.5
-cache_read = 0.04
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_details" }
+
+[cost.text.input]
+price = 0.2
+cache = { read = 0.04 }
+
+[cost.text.output]
+price = 0.5

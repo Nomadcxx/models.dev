@@ -15,22 +15,27 @@
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Context price bands (host pricing table, accessed 2026-10-21): <= 256K 0.40/1.60/0.08/0.50,
 #   > 256K 1.20/4.80/0.24/1.50 (input/output/cache read/cache write).
+schema = 2
 base_model = "alibaba/qwen3.7-plus"
 
-reasoning_options = []
+[capabilities]
+reasoning = { supported = true }
 
-[interleaved]
-field = "reasoning_content"
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_content" }
 
-[cost]
-input = 0.4
-output = 1.6
-cache_read = 0.08
-cache_write = 0.5
+[cost.text.input]
+price = 0.4
+cache = { read = 0.08, write = 0.5 }
 
-[[cost.tiers]]
-tier = { type = "context", size = 256_000 }
-input = 1.20
-output = 4.80
-cache_read = 0.24
-cache_write = 1.50
+[[cost.text.input.overrides]]
+when = { context = { gt = 256_000 } }
+price = 1.2
+cache = { read = 0.24, write = 1.5 }
+
+[cost.text.output]
+price = 1.6
+
+[[cost.text.output.overrides]]
+when = { context = { gt = 256_000 } }
+price = 4.8

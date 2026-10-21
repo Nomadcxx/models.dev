@@ -21,31 +21,37 @@
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Context price bands (host pricing table, accessed 2026-10-21): <= 32K 0.03/0.13/0.006/0.038,
 #   <= 256K 0.10/0.40/0.02/0.125, > 256K 0.20/0.80/0.04/0.25 (input/output/cache read/cache write).
+schema = 2
 base_model = "alibaba/qwen3.7-flash"
-
 base_model_omit = ["limit.input"]
 
-reasoning_options = []
+[capabilities]
+reasoning = { supported = true }
 
-[interleaved]
-field = "reasoning_details"
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_details" }
 
-[cost]
-input = 0.03
-output = 0.13
-cache_read = 0.006
-cache_write = 0.038
+[cost.text.input]
+price = 0.03
+cache = { read = 0.006, write = 0.038 }
 
-[[cost.tiers]]
-tier = { type = "context", size = 32_000 }
-input = 0.10
-output = 0.40
-cache_read = 0.02
-cache_write = 0.125
+[[cost.text.input.overrides]]
+when = { context = { gt = 32_000 } }
+price = 0.1
+cache = { read = 0.02, write = 0.125 }
 
-[[cost.tiers]]
-tier = { type = "context", size = 256_000 }
-input = 0.20
-output = 0.80
-cache_read = 0.04
-cache_write = 0.25
+[[cost.text.input.overrides]]
+when = { context = { gt = 256_000 } }
+price = 0.2
+cache = { read = 0.04, write = 0.25 }
+
+[cost.text.output]
+price = 0.13
+
+[[cost.text.output.overrides]]
+when = { context = { gt = 32_000 } }
+price = 0.4
+
+[[cost.text.output.overrides]]
+when = { context = { gt = 256_000 } }
+price = 0.8

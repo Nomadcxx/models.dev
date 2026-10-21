@@ -20,14 +20,18 @@
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Modalities inherited from base_model (images/audio/video); host publishes no per-model modality list.
+schema = 2
 base_model = "xiaomi/mimo-v2.6-pro-ultraspeed"
 
-reasoning_options = []
+[capabilities]
+reasoning = { supported = true }
 
-[interleaved]
-field = "reasoning_details"
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_details" }
 
-[cost]
-input = 4.35
-output = 8.7
-cache_read = 0.036
+[cost.text.input]
+price = 4.35
+cache = { read = 0.036 }
+
+[cost.text.output]
+price = 8.7

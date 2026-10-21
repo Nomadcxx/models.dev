@@ -22,17 +22,21 @@
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Modalities inherited from base_model; host publishes no per-model modality list.
 # limit.context: host catalog publishes 1000000 (base is 1048576); output not published, inherited.
+schema = 2
 base_model = "xiaomi/mimo-v2.5"
 
-reasoning_options = []
-
-[interleaved]
-field = "reasoning_details"
+[capabilities]
+reasoning = { supported = true }
 
 [limit]
-context = 1000000
+context = 1_000_000
 
-[cost]
-input = 0.14
-output = 0.28
-cache_read = 0.0028
+[api.chat-completions]
+compatibility = { reasoning_field = "reasoning_details" }
+
+[cost.text.input]
+price = 0.14
+cache = { read = 0.0028 }
+
+[cost.text.output]
+price = 0.28

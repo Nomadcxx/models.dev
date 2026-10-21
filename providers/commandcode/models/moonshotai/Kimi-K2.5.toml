@@ -13,15 +13,19 @@
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Output ceiling: capped at the host context window (prompt plus completion), as Kimi-K2.7-Code.
+schema = 2
 base_model = "moonshotai/kimi-k2.5"
 
-reasoning = false
+[capabilities]
+reasoning = { supported = false }
 
 [limit]
-output = 256000
-context = 256000
+output = 256_000
+context = 256_000
 
-[cost]
-input = 0.6
-output = 3
-cache_read = 0.1
+[cost.text.input]
+price = 0.6
+cache = { read = 0.1 }
+
+[cost.text.output]
+price = 3
