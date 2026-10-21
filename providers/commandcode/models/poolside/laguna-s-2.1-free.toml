@@ -21,6 +21,8 @@
 #   with reasoning_content, so replay with reasoning_details on this gateway is not verified yet.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
 # limit.context: host catalog publishes 256000 (base is 1048576); output not published, inherited.
+# Separate control probe (CommandCode chat API, 2026-10-22): chat_template_kwargs.enable_thinking
+# false/true returned HTTP 429 rate_limit_error on two paired attempts; control remains unverified.
 schema = 2
 base_model = "poolside/laguna-s-2.1"
 

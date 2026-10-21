@@ -15,6 +15,9 @@
 # Streaming live 2026-10-21: stream completes with data: [DONE].
 # Context price bands (host pricing table, accessed 2026-10-21): <= 256K 0.40/1.60/0.08/0.50,
 #   > 256K 1.20/4.80/0.24/1.50 (input/output/cache read/cache write).
+# Separate control probe (CommandCode chat API, 2026-10-22): enable_thinking=false returned
+# 155/149/240 reasoning tokens across three short prompts; true returned 141/200/302. The field
+# did not disable reasoning on this host.
 schema = 2
 base_model = "alibaba/qwen3.7-plus"
 

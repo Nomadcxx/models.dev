@@ -15,6 +15,10 @@
 # limit.context: host catalog publishes 200000 (base is 1000000); output not published, inherited.
 # Context price bands (host pricing table, accessed 2026-10-21): <= 256K 0.50/3.00/0.10,
 #   > 256K 2.00/6.00/0.20 (input/output/cache read; the host publishes no cache write band).
+# Separate controls (CommandCode chat API, 2026-10-22): enable_thinking=false returned 157/246/346
+# reasoning tokens across three short prompts; true returned 116/237/307. thinking_budget=64
+# returned 155/309/447 tokens; 1024 returned 118/252/278. The toggle did not disable reasoning,
+# and the lower budget did not cap it on this host.
 schema = 2
 base_model = "alibaba/qwen3.6-plus"
 
