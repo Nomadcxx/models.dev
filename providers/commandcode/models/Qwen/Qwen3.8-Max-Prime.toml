@@ -9,8 +9,8 @@
 #   output.
 #   Paired test (10 fixed prompts, low vs xhigh on the same prompt, 9 valid pairs): mean Δ -40
 #   reasoning tokens (2 prompts higher, 7 lower), sign p = 0.18; no measurable level effect.
-#   CommandCode accepted reasoning_effort=medium (HTTP 200, 2026-10-22); max is accepted but no peer
-#   publishes it. The toggle probe hit HTTP 429, so I list the peer effort set without claiming a toggle.
+#   CommandCode accepted reasoning_effort=medium and max, but paired tests found no measurable
+#   effect. The toggle probe hit HTTP 429, so no reasoning controls are listed.
 # Response field: reasoning_details (array). OpenCode replay has not been verified for
 #   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
@@ -19,7 +19,7 @@ schema = 2
 base_model = "alibaba/qwen3.8-max-prime"
 
 [capabilities]
-reasoning = { supported = true, effort = ["low", "medium", "high", "xhigh"] }
+reasoning = { supported = true }
 
 [api.chat-completions]
 compatibility = { replay_reasoning = false }

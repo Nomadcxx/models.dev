@@ -13,9 +13,8 @@
 #   demonstrably changes the reasoning output.
 #   Paired test attempted the same design (10 fixed prompts, low vs xhigh): upstream capacity
 #   errors left 1 valid pair (mean Δ +249, sign p = 1.0), so the paired design is inconclusive
-#   here. The endpoint control probe also hit HTTP 429; I keep the peer-documented toggle and mark
-#   its CommandCode forwarding as unverified.
-# Toggle: chat_template_kwargs.enable_thinking = true|false (Poolside peer request field).
+#   here. The endpoint control probe also hit HTTP 429, so CommandCode toggle forwarding remains
+#   unverified and no toggle is listed.
 # Response field: reasoning_details (array). OpenCode replay has not been verified for
 #   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
@@ -26,7 +25,7 @@ schema = 2
 base_model = "poolside/laguna-s-2.1"
 
 [capabilities]
-reasoning = { supported = true, toggle = true }
+reasoning = { supported = true }
 
 [limit]
 context = 256_000
