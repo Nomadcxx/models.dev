@@ -1,6 +1,9 @@
 # Source: https://commandcode.ai/docs/provider (accessed 2026-10-21)
 # Model catalog + pricing: https://commandcode.ai/models and
 # https://api.commandcode.ai/provider/v1/models
+# Toggle: chat_template_kwargs.enable_thinking = true|false (Poolside API field).
+# The native and Vercel entries for this model expose the toggle. CommandCode probes returned
+# HTTP 429, so forwarding and effect on this host remain unverified.
 # Free tier: https://commandcode.ai/docs/resources/pricing-limits#laguna-s-2.1-free ("free while
 #   capacity lasts"), accessed 2026-10-21.
 # Live /chat/completions (2026-10-21): reasoning returned in reasoning and reasoning_details (array).
@@ -14,7 +17,7 @@
 #   Paired test attempted the same design (10 fixed prompts, low vs xhigh): upstream capacity
 #   errors left 1 valid pair (mean Δ +249, sign p = 1.0), so the paired design is inconclusive
 #   here. The endpoint control probe also hit HTTP 429, so CommandCode toggle forwarding remains
-#   unverified and no toggle is listed.
+#   unverified.
 # Response field: reasoning_details (array). OpenCode replay has not been verified for
 #   this field; replay_reasoning=false keeps it out of the generated interleaved metadata.
 # Tool call live 2026-10-21: HTTP 200, finish_reason=tool_calls, arguments parse as JSON.
@@ -25,7 +28,7 @@ schema = 2
 base_model = "poolside/laguna-s-2.1"
 
 [capabilities]
-reasoning = { supported = true }
+reasoning = { supported = true, toggle = true }
 
 [limit]
 context = 256_000
